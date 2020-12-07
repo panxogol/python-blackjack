@@ -1,0 +1,11 @@
+# Directories
+
+Lib/
+Scripts/
+"External Libraries"/
+"Scratches and Consoles"/
+.idea/
+
+# Files
+
+pyvenv.cfg
