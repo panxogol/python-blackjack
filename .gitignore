@@ -9,3 +9,4 @@ Scripts/
 # Files
 
 pyvenv.cfg
+__pycache__/
