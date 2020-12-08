@@ -36,7 +36,7 @@ def start():
             print(f"Your hand is now {player_hand} and your score is {player_score}.")
             add_card = want_another_card()
 
-    dealer_has_won = dealer_won(player_hand, dealer_hand, cards_values)
+    dealer_has_won = not player_won(player_hand, dealer_hand, cards_values)
     dealer_score = compute_score(dealer_hand, cards_values)
     print(f"The dealer has {dealer_hand}, with a score of {dealer_score}.")
     while not dealer_has_won:
@@ -46,6 +46,8 @@ def start():
             dealer_score = compute_score(dealer_hand, cards_values)
             print(f"The dealer has {dealer_hand}, with a score of {dealer_score}.")
             dealer_has_won = dealer_won(player_hand, dealer_hand, cards_values)
+        else:
+            break
 
     if player_score == dealer_score:
         print(f"It's a draw. You both have a score of {player_score}.")
@@ -58,6 +60,8 @@ def start():
 
     if want_restart():
         start()
+    else:
+        return
 
 # start and play
 start()

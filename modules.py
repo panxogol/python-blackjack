@@ -1,5 +1,6 @@
 from random import choice
 
+
 # Creates the cards
 def create_cards():
     """
@@ -21,6 +22,7 @@ def create_cards():
         "K": 10
     }
 
+
 # deal cards
 def deal_cards(cards: dict):
     """
@@ -29,22 +31,23 @@ def deal_cards(cards: dict):
     hand = [choice(list(cards)), choice(list(cards))]
     return hand
 
+
 # Compute the score of a hand
 def compute_score(hand: list, cards: dict):
     """
     It returns the score of a blackjack hand
     """
-    score = 0
+    points = []
     for card in hand:
         if card == "A":
-            if score + cards[card][1] > 21:
-                score += cards[card][0]
-            else:
-                score += cards[card][1]
+            points.append(cards[card][1])
         else:
-            score += cards[card]
-
+            points.append(cards[card])
+    while 11 in points and sum(points) > 21:
+        points[points.index(11)] = 1
+    score = sum(points)
     return score
+
 
 # ask the player for another card
 def want_another_card():
@@ -52,14 +55,15 @@ def want_another_card():
     Ask the user if wants a new card. Case yes: return True, case no: return False.
     """
     print("Do you want to add one more card?")
-    answer = input("Please write (y)es or (N)o: ").lower()
+    answer = input("Please write (y)es or (n)o: ").lower()
     while answer != "y" and answer != "n":
         print("You've entered a wrong answer. Try again.")
-        answer = input("Please write (y)es or (N)o: ").lower()
+        answer = input("Please write (y)es or (n)o: ").lower()
     if answer == "y":
         return True
     else:
         return False
+
 
 # Compare two hands
 def player_won(player_hand: list, dealer_hand: list, cards: dict):
@@ -76,8 +80,9 @@ def player_won(player_hand: list, dealer_hand: list, cards: dict):
     else:
         return False
 
+
 # Dealer won
-def dealer_won(player_hand: list, dealer_hand:list, cards:dict):
+def dealer_won(player_hand: list, dealer_hand: list, cards: dict):
     """
     Check if dealer has a better hand than the player, returns True in that case, False in the other case.
     """
@@ -91,6 +96,7 @@ def dealer_won(player_hand: list, dealer_hand:list, cards:dict):
     else:
         return False
 
+
 # Give a card to the player
 def give_card(hand: list, cards: dict):
     """
@@ -99,6 +105,7 @@ def give_card(hand: list, cards: dict):
     new_card = choice(list(cards))
     print(f"The new card is {new_card}.")
     hand.append(new_card)
+
 
 # Checks if player wants to play again
 def want_restart():
